@@ -1,15 +1,12 @@
-# ejerc006
 
-### Trabajo de descanso - Edificio
+Ejercicio 006
 
-
-
-El Repositorio debe ser privado.
-
+privado el repositorio
 
 4 entidades
 Edificio
     edificioId
+
 Aula
     aulaID
     edificioID
