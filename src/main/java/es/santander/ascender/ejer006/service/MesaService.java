@@ -18,13 +18,13 @@ public class MesaService {
     @Autowired
     private MesaRepository repository;
 
-    public Mesa create(Mesa Mesa) {
-        if (Mesa.getId() != null) {
+    public Mesa create(Mesa mesa) {
+        if (mesa.getId() != null) {
             throw new CrudSecurityException("Han tratado de modificar un registro de Mesa utilizando la creación",
                                                  CRUDOperation.CREATE, 
-                                                 Mesa.getId());
+                                                 mesa.getId());
         }
-        return repository.save(Mesa);
+        return repository.save(mesa);
     }
 
     @Transactional(readOnly = true)
@@ -37,13 +37,13 @@ public class MesaService {
         return repository.findAll();
     }
 
-    public Mesa update(Mesa Mesa) {
-        if (Mesa.getId() == null) {
+    public Mesa update(Mesa mesa) {
+        if (mesa.getId() == null) {
             throw new CrudSecurityException("Han tratado de crear un registro Mesa utilizando la modifición",
                                                  CRUDOperation.UPDATE, 
                                                  null);           
         }
-        return repository.save(Mesa);
+        return repository.save(mesa);
     }
 
     public void delete(Long id) {

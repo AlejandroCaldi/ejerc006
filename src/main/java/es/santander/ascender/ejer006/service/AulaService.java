@@ -18,13 +18,13 @@ public class AulaService {
     @Autowired
     private AulaRepository repository;
 
-    public Aula create(Aula Aula) {
-        if (Aula.getId() != null) {
+    public Aula create(Aula aula) {
+        if (aula.getId() != null) {
             throw new CrudSecurityException("Han tratado de modificar un registro de Aula utilizando la creación",
                                                  CRUDOperation.CREATE, 
-                                                 Aula.getId());
+                                                 aula.getId());
         }
-        return repository.save(Aula);
+        return repository.save(aula);
     }
 
     @Transactional(readOnly = true)
@@ -37,13 +37,13 @@ public class AulaService {
         return repository.findAll();
     }
 
-    public Aula update(Aula Aula) {
-        if (Aula.getId() == null) {
+    public Aula update(Aula aula) {
+        if (aula.getId() == null) {
             throw new CrudSecurityException("Han tratado de crear un registro Aula utilizando la modifición",
                                                  CRUDOperation.UPDATE, 
                                                  null);           
         }
-        return repository.save(Aula);
+        return repository.save(aula);
     }
 
     public void delete(Long id) {

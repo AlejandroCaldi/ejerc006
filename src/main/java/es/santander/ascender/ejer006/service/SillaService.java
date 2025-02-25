@@ -18,13 +18,13 @@ public class SillaService {
     @Autowired
     private SillaRepository repository;
 
-    public Silla create(Silla Silla) {
-        if (Silla.getId() != null) {
+    public Silla create(Silla silla) {
+        if (silla.getId() != null) {
             throw new CrudSecurityException("Han tratado de modificar un registro de Silla utilizando la creación",
                                                  CRUDOperation.CREATE, 
-                                                 Silla.getId());
+                                                 silla.getId());
         }
-        return repository.save(Silla);
+        return repository.save(silla);
     }
 
     @Transactional(readOnly = true)
@@ -37,13 +37,13 @@ public class SillaService {
         return repository.findAll();
     }
 
-    public Silla update(Silla Silla) {
-        if (Silla.getId() == null) {
+    public Silla update(Silla silla) {
+        if (silla.getId() == null) {
             throw new CrudSecurityException("Han tratado de crear un registro Silla utilizando la modifición",
                                                  CRUDOperation.UPDATE, 
                                                  null);           
         }
-        return repository.save(Silla);
+        return repository.save(silla);
     }
 
     public void delete(Long id) {
