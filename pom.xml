@@ -8,7 +8,7 @@
 		<version>3.4.3</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>es.santander.ascender.ejer005</groupId>
+	<groupId>es.santander.ascender.ejer006</groupId>
 	<artifactId>ejer005</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>ejer005</name>
