@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import es.santander.ascender.ejer006.enums.Condiciones;
-import es.santander.ascender.ejer006.model.Mesa;
 import es.santander.ascender.ejer006.model.Silla;
 
 @SpringBootTest
@@ -59,7 +58,7 @@ public class SillaRepositoryTest {
     public void view() {
 
         String marcaBuscar = "Silluti";
-        Silla silla = getSilla("S1000251",Condiciones.SUCIA, marcaBuscar, "Reclianble DeLuxe", 351l);
+        Silla silla = getSilla("S1000253",Condiciones.SUCIA, marcaBuscar, "Reclianble DeLuxe", 351l);
         repository.save(silla);
 
         Optional<Silla> registro = repository.findById(silla.getId());
@@ -73,7 +72,7 @@ public class SillaRepositoryTest {
 
         String modeloOriginal = "Etrusca";
         String modeloNuevo = "Romana";
-        Silla silla = getSilla("S1000251",Condiciones.SUCIA, modeloOriginal, "Reclianble DeLuxe", 351l);
+        Silla silla = getSilla("S1000252",Condiciones.SUCIA, modeloOriginal, "Reclianble DeLuxe", 351l);
         repository.save(silla);
 
         assertTrue(repository.existsById(silla.getId()));
