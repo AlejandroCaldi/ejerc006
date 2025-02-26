@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import es.santander.ascender.ejer006.model.Mesa;
 import es.santander.ascender.ejer006.model.Silla;
 import es.santander.ascender.ejer006.service.SillaService;
 

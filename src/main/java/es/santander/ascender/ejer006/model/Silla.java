@@ -10,7 +10,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.Size;
 
 @Entity
@@ -33,7 +33,7 @@ public class Silla {
     @Column
     private String modelo;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "mesa_id", nullable = false) 
     private Mesa mesaId;
 

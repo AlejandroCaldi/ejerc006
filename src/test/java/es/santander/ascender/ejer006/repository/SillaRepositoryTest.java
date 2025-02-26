@@ -1,5 +1,6 @@
 package es.santander.ascender.ejer006.repository;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -18,6 +19,8 @@ import es.santander.ascender.ejer006.model.Aula;
 import es.santander.ascender.ejer006.model.Edificio;
 import es.santander.ascender.ejer006.model.Mesa;
 import es.santander.ascender.ejer006.model.Silla;
+import es.santander.ascender.ejer006.service.SillaService;
+import jakarta.transaction.Transactional;
 
 @TestInstance(Lifecycle.PER_CLASS)
 @SpringBootTest
@@ -34,9 +37,13 @@ public class SillaRepositoryTest {
 
     @Autowired
     private MesaRepository repositoryMesa;
+
+    @Autowired
+    private SillaService serviceSilla;
     
     private Edificio edificio;
     private Aula aula;
+    private Mesa mesa;
 
     @BeforeAll
     public void setUp() {
@@ -45,16 +52,15 @@ public class SillaRepositoryTest {
 
         aula = new Aula(null, "A999", 875, true, 123l, edificio);
         repositoryAula.save(aula);
+
+        mesa = new Mesa(null, "MM77776", Condiciones.OK, "Marca Tipo Mesa", "No sé, es una mesa", aula);
+        repositoryMesa.save(mesa);
     }
 
 
 
-    private Silla getSilla(String codigoMesa, Condiciones condicionMesa, String marcaMesa, String modeloMesa, Aula aula,
-        String codigoSilla, Condiciones condicionSilla, String marcaSilla, String modeloSilla) {
+    private Silla getSilla(String codigoSilla, Condiciones condicionSilla, String marcaSilla, String modeloSilla, Mesa mesa) {
         
-        Mesa mesa = new Mesa(null, codigoMesa, condicionMesa, marcaMesa, modeloMesa, aula);
-        repositoryMesa.save(mesa);
-    
         Silla silla = new Silla();
         silla.setCodigo(codigoSilla);
         silla.setCondicion(condicionSilla);
@@ -67,8 +73,7 @@ public class SillaRepositoryTest {
 
     @Test
     public void testCreate() {
-        Silla silla = getSilla("MMM98765",Condiciones.OK, "MarcablaBlah", "ModeloChiChat", aula,
-                            "XX5588",Condiciones.OK, "Tecno", "Reclianble DeLuxe");
+        Silla silla = getSilla("XX5588",Condiciones.OK, "Tecno", "Reclianble DeLuxe", mesa);
         repository.save(silla);
 
         assertTrue(
@@ -82,8 +87,7 @@ public class SillaRepositoryTest {
     public void delete() {
 
         String codigoSilla = "XX5589";
-        Silla silla = getSilla("MMM98766",Condiciones.OK, "MarcablaBlah", "ModeloChiChat", aula,
-                               codigoSilla,Condiciones.OK, "Tecno", "Reclianble Standard");
+        Silla silla = getSilla(codigoSilla,Condiciones.OK, "Tecno", "Reclianble Standard", mesa);
         repository.save(silla);
 
         assertTrue(repository.existsById(silla.getId()));
@@ -97,8 +101,7 @@ public class SillaRepositoryTest {
     public void view() {
 
         String codigoBuscar = "S1000600";
-        Silla silla = getSilla("MMM98767",Condiciones.OK, "MarcablaBlah", "ModeloChiChat", aula,
-                         codigoBuscar,Condiciones.OK, "Tecno", "Reclianble Standard");
+        Silla silla = getSilla(codigoBuscar,Condiciones.OK, "Tecno", "Reclianble Standard", mesa);
         repository.save(silla);
 
         Optional<Silla> registro = repository.findById(silla.getId());
@@ -112,8 +115,7 @@ public class SillaRepositoryTest {
 
         String modeloOriginal = "Etrusca";
         String modeloNuevo = "Romana";
-        Silla silla = getSilla("MMM98768",Condiciones.OK, "MarcablaBlah", "ModeloChiChat", aula,
-                         "S1000699",Condiciones.OK, "Tecno", modeloOriginal);
+        Silla silla = getSilla("S1000699",Condiciones.OK, "Tecno", modeloOriginal, mesa);
         repository.save(silla);
 
         assertTrue(repository.existsById(silla.getId()));
@@ -126,6 +128,22 @@ public class SillaRepositoryTest {
         assertTrue(updatedSilla.isPresent());
         assertTrue(updatedSilla.get().getModelo().equals(modeloNuevo));
 
+    }
+
+    @Transactional
+    @Test
+    public void moverSillaMesa() {
+        Mesa mesaNueva = new Mesa(null, "MM7777", Condiciones.SUCIA, "Marca Genérica", "modelo genérico (es una silla)", aula);
+        repositoryMesa.save(mesaNueva);
+
+        Silla silla = new Silla(null, "MU0444",Condiciones.OK,"MesaStar","Cedro barnizado", mesa);
+        repository.save(silla);
+
+        serviceSilla.moverSillaDeMesa(silla.getId(), mesaNueva.getId());
+
+        Silla sillaActualizada = repository.findById(silla.getId()).orElseThrow();
+
+        assertEquals(mesaNueva.getId(), sillaActualizada.getMesaId().getId(), "MesaId de silla actualizada debería ser igual a id de Mesa");
 
     }
 

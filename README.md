@@ -26,15 +26,12 @@ Silla
     Chequeo y funcionamiento de endpoints
 
     Agregado de todas las claves foraneas y adaptados los test para respetar las restricciones. 
+
+    Exponer dentro un método que permita mover una mesa a una nueva aula.
+
+    Mover una silla de mesa. Que no sea el método actualizar. Ei Id de aula y el ID de mesa y que lo asigne. 
     
 
 En Proceso de armado.
-
-
-    Exponer dentro un método que permita mover una mesa a una nueva aula.
-    
-    Mover una silla de mesa. Que no sea el método actualizar. Ei Id de aula y el ID de mesa y que lo asigne. 
-
-    Lo mismo entre silla y mesa.  
 
     Testear endpoints para esos movimientos. 
