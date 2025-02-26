@@ -27,7 +27,7 @@ public class Aula {
     private Long responsableId;
 
     @ManyToOne
-    @JoinColumn(name = "edificio_id", nullable = false) // Foreign key reference to Edificio
+    @JoinColumn(name = "edificio_id", nullable = false) 
     private Edificio edificio;
 
     public Aula() {

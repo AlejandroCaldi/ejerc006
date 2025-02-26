@@ -9,6 +9,9 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.validation.constraints.Size;
 
 @Entity
@@ -31,15 +34,16 @@ public class Silla {
     @Column
     private String modelo;
 
-    @Column(nullable = false)
-    private Long mesaId;
+    @OneToOne
+    @JoinColumn(name = "mesa_id", nullable = false) 
+    private Mesa mesaId;
 
     public Silla(){
 
     }
 
     public Silla(Long id, String codigo, Condiciones condicion, @Size(max = 30) String marca,
-            @Size(max = 200) String modelo, Long mesaId) {
+            @Size(max = 200) String modelo, Mesa mesaId) {
         this.id = id;
         this.codigo = codigo;
         this.condicion = condicion;
@@ -88,11 +92,11 @@ public class Silla {
         this.modelo = modelo;
     }
 
-    public Long getMesaId() {
+    public Mesa getMesaId() {
         return mesaId;
     }
 
-    public void setMesaId(Long mesaId) {
+    public void setMesaId(Mesa mesaId) {
         this.mesaId = mesaId;
     }
 
