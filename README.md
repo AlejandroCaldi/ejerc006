@@ -2,7 +2,7 @@
 
 ### Trabajo de descanso - Edificio
 
-
+Terminado. 
 
 El Repositorio debe ser privado.
 
@@ -21,13 +21,21 @@ Silla
     mesaID
 
 
-Agrergar otros campos para cada entidad, mínimo 4. Iventando validaciones.
+    Agregar otros campos para cada entidad, mínimo 4. Iventando validaciones.
+
+    Chequeo y funcionamiento de endpoints
+    
+
+En Proceso de armado.
 
 
-Exponer dentro un método qu epermita mover uan mesa a un nuevo aula.
-Mover una silla de mesa. Que no sea el método actualizar. Ei Id de aula y el ID de mesa y que lo asigne. 
+    Exponer dentro un método que permita mover una mesa a una nueva aula.
+    
+    Mover una silla de mesa. Que no sea el método actualizar. Ei Id de aula y el ID de mesa y que lo asigne. 
 
-Lo mismo entre silla y mesa.  
+    Lo mismo entre silla y mesa.  
 
-Para el caso de mover la mesa, armar un método para que viaje también con ello 
-la silla o no. 
+    Para el caso de mover la mesa, armar un método para que viaje también con ello 
+    la silla o no. 
+
+    Testear endpoints para esos movimientos. 
