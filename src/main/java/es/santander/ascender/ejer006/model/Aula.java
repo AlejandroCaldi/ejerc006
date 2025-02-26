@@ -5,6 +5,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Aula {
@@ -24,20 +26,21 @@ public class Aula {
     @Column(nullable = false)
     private Long responsableId;
 
-    @Column(nullable = false)
-    private Long edificioId;
+    @ManyToOne
+    @JoinColumn(name = "edificio_id", nullable = false) // Foreign key reference to Edificio
+    private Edificio edificio;
 
     public Aula() {
     }
 
     public Aula(Long id, String codigo, Integer capacidadMaxima, Boolean enCondiciones, Long responsableId,
-            Long edificioId) {
+            Edificio edificio) {
         this.id = id;
         this.codigo = codigo;
         this.capacidadMaxima = capacidadMaxima;
         this.enCondiciones = enCondiciones;
         this.responsableId = responsableId;
-        this.edificioId = edificioId;
+        this.edificio = edificio;
     }
 
     public Long getId() {
@@ -80,12 +83,12 @@ public class Aula {
         this.responsableId = responsableId;
     }
 
-    public Long getEdificioId() {
-        return edificioId;
+    public Edificio getEdificioId() {
+        return edificio;
     }
 
-    public void setEdificioId(Long edificioId) {
-        this.edificioId = edificioId;
+    public void setEdificioId(Edificio edificioId) {
+        this.edificio = edificioId;
     }
 
     
