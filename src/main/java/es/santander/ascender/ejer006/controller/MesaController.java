@@ -3,6 +3,7 @@ package es.santander.ascender.ejer006.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -45,6 +46,14 @@ public class MesaController {
     @DeleteMapping("/{id}")
     public void delete(@PathVariable("id") Long id) {
         mesaService.delete(id);
+    }
+
+    @PutMapping("/{mesaId}/mover/{nuevaAulaId}")
+    public ResponseEntity<Mesa> moverMesa(
+            @PathVariable Long mesaId,
+            @PathVariable Long nuevaAulaId) {
+        Mesa mesaActualizada = mesaService.moverMesaDeAula(mesaId, nuevaAulaId);
+        return ResponseEntity.ok(mesaActualizada);
     }
 
 }

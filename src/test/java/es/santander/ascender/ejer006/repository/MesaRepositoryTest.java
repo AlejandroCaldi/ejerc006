@@ -1,5 +1,6 @@
 package es.santander.ascender.ejer006.repository;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -17,6 +18,7 @@ import es.santander.ascender.ejer006.enums.Usos;
 import es.santander.ascender.ejer006.model.Aula;
 import es.santander.ascender.ejer006.model.Edificio;
 import es.santander.ascender.ejer006.model.Mesa;
+import es.santander.ascender.ejer006.service.MesaService;
 import jakarta.transaction.Transactional;
 
 
@@ -32,6 +34,9 @@ public class MesaRepositoryTest {
 
     @Autowired
     private AulaRepository repositoryAula;
+
+    @Autowired
+    private MesaService serviceMesa;
     
     private Edificio edificio;
     private Aula aula;
@@ -114,6 +119,24 @@ public class MesaRepositoryTest {
         assertTrue(updatedMesa.isPresent());
         assertTrue(updatedMesa.get().getCondicion().equals(condArreglada));
 
+
+    }
+
+    @Transactional
+    @Test
+    public void moverMesaAula() {
+    Aula aulaNueva = new Aula(null, "A888", 2000, true, 123l, edificio);
+    repositoryAula.save(aulaNueva);
+
+    Mesa mesa = crearMesaEnAula("MU0444",Condiciones.OK,"MesaStar","Cedro barnizado", aula);
+    repository.save(mesa);
+
+    serviceMesa.moverMesaDeAula(mesa.getId(), aulaNueva.getId());
+
+    Mesa mesaActualizada = repository.findById(mesa.getId()).orElseThrow();
+
+    // Verify the Mesa is now in aula2
+    assertEquals(aulaNueva.getId(), mesaActualizada.getAulaId().getId(), "AulaId de mesa actualizado debería ser igual a id de Aula");
 
     }
 

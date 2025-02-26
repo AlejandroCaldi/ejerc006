@@ -8,7 +8,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import es.santander.ascender.ejer006.enums.CRUDOperation;
 import es.santander.ascender.ejer006.exceptions.CrudSecurityException;
+import es.santander.ascender.ejer006.model.Mesa;
 import es.santander.ascender.ejer006.model.Silla;
+import es.santander.ascender.ejer006.repository.MesaRepository;
 import es.santander.ascender.ejer006.repository.SillaRepository;
 
 @Service
@@ -17,6 +19,9 @@ public class SillaService {
 
     @Autowired
     private SillaRepository repository;
+
+    @Autowired
+    private MesaRepository repositoryMesa;
 
     public Silla create(Silla silla) {
         if (silla.getId() != null) {
@@ -51,5 +56,16 @@ public class SillaService {
         return;
     }
 
+    @Transactional
+    public Silla moverSillaDeMesa(Long sillaId, Long mesaId) {
+        Silla silla = repository.findById(sillaId)
+                .orElseThrow(() -> new RuntimeException("Mesa no encontrada"));
+
+        Mesa nuevaMesa = repositoryMesa.findById(mesaId)
+                .orElseThrow(() -> new RuntimeException("Aula destino no encontrada"));
+
+        silla.setMesaId(nuevaMesa);
+        return repository.save(silla);
+    }
 
 }
