@@ -30,8 +30,11 @@ Silla
     Exponer dentro un método que permita mover una mesa a una nueva aula.
 
     Mover una silla de mesa. Que no sea el método actualizar. Ei Id de aula y el ID de mesa y que lo asigne. 
+
+    Testear endpoints para esos movimientos. 
+
     
 
 En Proceso de armado.
 
-    Testear endpoints para esos movimientos. 
+    Test provocando fallos por restricciones de claves foraneas. 
