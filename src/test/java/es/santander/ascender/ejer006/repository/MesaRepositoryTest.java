@@ -2,6 +2,7 @@ package es.santander.ascender.ejer006.repository;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Optional;
@@ -121,6 +122,7 @@ public class MesaRepositoryTest {
 
 
     }
+    
 
     @Transactional
     @Test
@@ -139,5 +141,33 @@ public class MesaRepositoryTest {
     assertEquals(aulaNueva.getId(), mesaActualizada.getAulaId().getId(), "AulaId de mesa actualizado debería ser igual a id de Aula");
 
     }
+
+    @Transactional
+    @Test
+    public void moverMesaAulaMalAula() {
+    Aula aulaNueva = new Aula(null, "A888", 2000, true, 123l, edificio);
+    repositoryAula.save(aulaNueva);
+
+    Mesa mesa = crearMesaEnAula("MU0444",Condiciones.OK,"MesaStar","Cedro barnizado", aula);
+    repository.save(mesa);
+
+    assertThrows(Exception.class, ()->serviceMesa.moverMesaDeAula(mesa.getId(), aulaNueva.getId()+1000000));
+
+    }
+
+    @Transactional
+    @Test
+    public void moverMesaAulaMalMesa() {
+    Aula aulaNueva = new Aula(null, "A888", 2000, true, 123l, edificio);
+    repositoryAula.save(aulaNueva);
+
+    Mesa mesa = crearMesaEnAula("MU0444",Condiciones.OK,"MesaStar","Cedro barnizado", aula);
+    repository.save(mesa);
+
+    assertThrows(Exception.class, ()->serviceMesa.moverMesaDeAula(mesa.getId()+1000000, aulaNueva.getId()));
+
+    }
+
+
 
 }

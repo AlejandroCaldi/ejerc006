@@ -2,6 +2,7 @@ package es.santander.ascender.ejer006.repository;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Optional;
@@ -144,6 +145,35 @@ public class SillaRepositoryTest {
         Silla sillaActualizada = repository.findById(silla.getId()).orElseThrow();
 
         assertEquals(mesaNueva.getId(), sillaActualizada.getMesaId().getId(), "MesaId de silla actualizada debería ser igual a id de Mesa");
+
+    }
+
+
+    @Transactional
+    @Test
+    public void moverSillaMesaMalMesa() {
+        Mesa mesaNueva = new Mesa(null, "MM7777", Condiciones.SUCIA, "Marca Genérica", "modelo genérico (es una silla)", aula);
+        repositoryMesa.save(mesaNueva);
+
+        Silla silla = new Silla(null, "MU0444",Condiciones.OK,"MesaStar","Cedro barnizado", mesa);
+        repository.save(silla);
+
+        assertThrows(Exception.class, () -> serviceSilla.moverSillaDeMesa(silla.getId(), mesaNueva.getId()+10000000));
+
+
+    }
+
+    @Transactional
+    @Test
+    public void moverSillaMesaMalSilla() {
+        Mesa mesaNueva = new Mesa(null, "MM7777", Condiciones.SUCIA, "Marca Genérica", "modelo genérico (es una silla)", aula);
+        repositoryMesa.save(mesaNueva);
+
+        Silla silla = new Silla(null, "MU0444",Condiciones.OK,"MesaStar","Cedro barnizado", mesa);
+        repository.save(silla);
+
+        assertThrows(Exception.class, () -> serviceSilla.moverSillaDeMesa(silla.getId()+100000000, mesaNueva.getId()));
+
 
     }
 
