@@ -33,8 +33,7 @@ Silla
 
     Testear endpoints para esos movimientos. 
 
-    
+    Tests provocando fallos por restricciones de claves foraneas. 
 
 En Proceso de armado.
 
-    Test provocando fallos por restricciones de claves foraneas. 
