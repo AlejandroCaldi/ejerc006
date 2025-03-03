@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>es.santander.ascender.ejer006</groupId>
-	<artifactId>ejer005</artifactId>
+	<artifactId>ejer006</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>ejer005</name>
+	<name>ejer006</name>
 	<description>Trabajo de descanso</description>
 	<url/>
 	<licenses>
