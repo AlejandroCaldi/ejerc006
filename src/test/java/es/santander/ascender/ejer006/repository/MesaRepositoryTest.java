@@ -13,6 +13,7 @@ import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
 import es.santander.ascender.ejer006.enums.Condiciones;
 import es.santander.ascender.ejer006.enums.Usos;
@@ -20,7 +21,7 @@ import es.santander.ascender.ejer006.model.Aula;
 import es.santander.ascender.ejer006.model.Edificio;
 import es.santander.ascender.ejer006.model.Mesa;
 import es.santander.ascender.ejer006.service.MesaService;
-import jakarta.transaction.Transactional;
+
 
 
 @TestInstance(Lifecycle.PER_CLASS)
