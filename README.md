@@ -4,6 +4,12 @@
 
 Terminado. 
 
+Es necesario crear la base de datos 'edificios' en postgres. 
+
+´´´sh
+CREATE DATABASE edificios;
+´´´
+
 El Repositorio debe ser privado.
 
 
